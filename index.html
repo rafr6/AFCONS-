@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ID Card</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .id-card {
+      width: 350px;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .header img {
+      height: 50px;
+    }
+    .photo {
+      text-align: center;
+      padding: 10px;
+    }
+    .photo img {
+      width: 120px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .info {
+      padding: 10px 20px;
+    }
+    .info h2 {
+      font-size: 18px;
+      margin: 10px 0 5px;
+      text-align: center;
+    }
+    .info p {
+      margin: 4px 0;
+    }
+    .label {
+      font-weight: normal;
+    }
+    .value {
+      font-weight: bold;
+    }
+    .address {
+      display: block;
+    }
+    .signatures {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .signatures img {
+      width: 80px;
+      height: auto;
+    }
+    .signature-label {
+      text-align: center;
+      font-size: 12px;
+    }
+    .footer {
+      background: #003f7f;
+      color: white;
+      text-align: center;
+      padding: 8px;
+      font-weight: bold;
+    }
+    #download-btn {
+      margin-top: 15px;
+      padding: 8px 16px;
+      background-color: #003f7f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    @media print {
+      #download-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="id-card" id="id-card">
+    <div class="header">
+      <img src="logo-left.png" alt="Company Left Logo">
+      <img src="logo-right.png" alt="Company Right Logo">
+    </div>
+    <div class="photo">
+      <img src="photo.jpg" alt="Photo">
+    </div>
+    <div class="info">
+      <h2>Emp Code: <span class="value">257370</span></h2>
+      <h2>Md Romjan Mia</h2>
+      <p><span class="label">Job Title:</span> <span class="value">Welder</span></p>
+      <p><span class="label">Blood Group:</span> <span class="value">B+</span></p>
+      <p><span class="label">Phone:</span> <span class="value">+880 1767679277</span></p>
+      <p><span class="label">Address:</span>
+        <span class="address value">Jatrapur,</span>
+        <span class="address value">Ashuganj,</span>
+        <span class="address value">Ashuganj-3402,</span>
+        <span class="address value">Brahmanbaria,</span>
+        <span class="address value">Chattogram.</span>
+      </p>
+    </div>
+    <div class="signatures">
+      <div>
+        <img src="signature-holder.png" alt="Holder Signature">
+        <div class="signature-label">Signature of Holder</div>
+      </div>
+      <div>
+        <img src="signature-md.png" alt="MD Signature">
+        <div class="signature-label">Managing Director</div>
+      </div>
+    </div>
+    <div class="footer">AFCONS INFRASTRUCTURE LIMITED</div>
+  </div>
+
+  <button id="download-btn" onclick="downloadPDF()">Download as PDF</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById("id-card");
+      var opt = {
+        margin:       0,
+        filename:     'id_card_romjan.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>
